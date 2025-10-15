@@ -31,7 +31,7 @@ export const AppSidebar = () => {
             className=" h-15 px-4 flex items-center gap-x-2"
           >
             <Link prefetch href={"/workflows"}>
-              <Image width={15} height={30} alt="logo" src="/logo.svg" />
+              <Image className="icon" width={15} height={30} alt="logo" src="/logo.svg" />
               <p className=" text-sm font-semibold">n7n</p>
             </Link>
           </SidebarMenuButton>
@@ -67,7 +67,7 @@ export const AppSidebar = () => {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu className=" bg-muted/20 rounded-md py-2 border border-accent/70">
+        <SidebarMenu className=" bg-muted/20 rounded-md py-2 ">
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip={"update to pro"}
