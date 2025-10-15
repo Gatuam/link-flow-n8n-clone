@@ -1,10 +1,17 @@
 import { inngest } from "./client";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { generateText } from "ai";
 
-export const helloWorld = inngest.createFunction(
-  { id: "hello-world" },
-  { event: "test/hello.world" },
+const google = createGoogleGenerativeAI();
+export const executeAi = inngest.createFunction(
+  { id: "execute" },
+  { event: "execute/ai" },
   async ({ event, step }) => {
-    await step.sleep("wait-a-moment", "1s");
-    return { message: `Hello ${event.data.email}!` };
+    const { steps } = await step.ai.wrap("gemini-gen-text", generateText, {
+      model: google("gemini-2.5-flash"),
+      system: "Assistent who is good at math",
+      prompt: "What is 2 + 2",
+    });
+    return steps;
   }
 );
