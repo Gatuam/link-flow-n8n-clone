@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -29,6 +29,7 @@ import {
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email("Please enter valid email"),
@@ -36,6 +37,8 @@ const formSchema = z.object({
 });
 
 export const SignInForm = () => {
+  const router = useRouter();
+  const [isLoading, setIsloading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,8 +47,7 @@ export const SignInForm = () => {
     },
   });
 
-  const isPending = form.formState.isSubmitting;
-  const isDisable = form;
+  const isPending = form.formState.isSubmitting || isLoading;
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     toast("You submit a form please wait", {
@@ -63,11 +65,47 @@ export const SignInForm = () => {
       } as React.CSSProperties,
     });
     console.log(data);
-    await authClient.signIn.email({
-      email: data.email,
-      password: data.password,
-      callbackURL: "/",
-    });
+    await authClient.signIn.email(
+      {
+        email: data.email,
+        password: data.password,
+        callbackURL: "/",
+      },
+      {
+        onRequest: (ctx) => {
+          setIsloading(true);
+        },
+        onSuccess: (ctx) => {
+          setIsloading(false);
+          toast("sign-up successfully", {
+            description: (
+              <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
+                <p className=" animate-pulse">Redirecting to dashborad</p>
+              </pre>
+            ),
+            position: "bottom-right",
+            classNames: {
+              content: "flex flex-col gap-2",
+            },
+            style: {
+              "--border-radius": "calc(var(--radius)  + 4px)",
+            } as React.CSSProperties,
+          });
+          router.push("/");
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message, {
+            description: (
+              <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
+                <p className=" animate-pulse">
+                  Error while sign up please try again
+                </p>
+              </pre>
+            ),
+          });
+        },
+      }
+    );
   }
 
   return (
@@ -92,7 +130,7 @@ export const SignInForm = () => {
               GitHub
             </Button>
 
-            <Button className="w-1/2" type="submit" form="form-rhf-demo">
+            <Button className="w-1/2" type="submit" form="form-rhf-google">
               Google
             </Button>
           </Field>
@@ -103,7 +141,7 @@ export const SignInForm = () => {
         <CardContent>
           <form
             className=" flex flex-col gap-y-5"
-            id="form-rhf-demo"
+            id="form-rhf-submit"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <FieldGroup className=" flex flex-col gap-y-4">
@@ -112,14 +150,14 @@ export const SignInForm = () => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">Email</FieldLabel>
+                    <FieldLabel htmlFor="form-rhf-email">Email</FieldLabel>
                     <Input
                       disabled={isPending}
                       {...field}
-                      id="form-rhf-demo-title"
+                      id="form-rhf-email"
                       aria-invalid={fieldState.invalid}
                       placeholder="sagar@gmail.com"
-                      autoComplete="off"
+                      autoComplete="on"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
@@ -132,13 +170,13 @@ export const SignInForm = () => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">
+                    <FieldLabel htmlFor="form-rhf-password">
                       Password
                     </FieldLabel>
                     <Input
                       disabled={isPending}
                       {...field}
-                      id="form-rhf-demo-title"
+                      id="form-rhf-password"
                       aria-invalid={fieldState.invalid}
                       placeholder="******"
                       autoComplete="off"
@@ -166,8 +204,8 @@ export const SignInForm = () => {
             >
               Reset
             </Button>
-            <Button className=" w-1/2" type="submit" form="form-rhf-demo">
-              Submit
+            <Button className=" w-1/2" type="submit" form="form-rhf-submit">
+              sign in
             </Button>
           </Field>
         </CardFooter>
@@ -182,8 +220,9 @@ export const SignInForm = () => {
               type="button"
               variant="link"
             >
-              <Link href={"/auth/sign-up"}></Link>
-              Dont have an account yet?
+              <Link href={"/auth/sign-up"}>
+                <p>Dont have an account yet?</p>
+              </Link>
             </Button>
           </Field>
         </CardFooter>
