@@ -25,17 +25,19 @@ export const AppSidebar = () => {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className=" border-b ">
-        <SidebarMenuButton>
-          <SidebarMenuButton
-            asChild
-            className=" h-15 px-4 flex items-center gap-x-2"
-          >
-            <Link prefetch href={"/workflows"}>
-              <Image className="icon" width={15} height={30} alt="logo" src="/logo.svg" />
-              <p className=" text-sm font-semibold">n7n</p>
-            </Link>
+        <SidebarMenu>
+          <SidebarMenuButton>
+            <SidebarMenuButton
+              asChild
+              className=" h-15 px-4 flex items-center gap-x-2"
+            >
+              <Link prefetch href={"/workflows"}>
+                <Image width={15} height={30} alt="logo" src="/logo.svg" />
+                <p className="icon text-sm font-semibold ">n7n</p>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuButton>
-        </SidebarMenuButton>
+        </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         {menuItems.map((gp) => (
@@ -80,7 +82,7 @@ export const AppSidebar = () => {
             <SidebarMenuButton
               tooltip={"update to pro"}
               className=" gap-x-4"
-              onClick={() => {}}
+              onClick={() => authClient.checkout({ slug: "n8n-dev" })}
             >
               <CreditCardIcon className=" size-4" />
               <span>Billings </span>
