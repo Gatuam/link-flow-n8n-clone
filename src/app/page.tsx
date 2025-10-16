@@ -11,6 +11,10 @@ import {
   Settings2Icon,
   User2Icon,
 } from "lucide-react";
+import InteractiveTabs from "@/components/global/hero";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ModeToggle } from "@/components/global/theme-toggle";
 
 export default function N7nLandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,13 +31,8 @@ export default function N7nLandingPage() {
   const Navigation = () => (
     <motion.nav
       className={`fixed top-0 w-full z-50 transition-all duration-200 ${
-        isScrolled
-          ? "/60 backdrop-blur-md border-b"
-          : "bg-transparent"
+        isScrolled ? "/60 backdrop-blur-md border-b" : "bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
     >
       <div className="container max-w-7xl mx-auto  py-4">
         <div className="flex items-center justify-between">
@@ -43,7 +42,7 @@ export default function N7nLandingPage() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            {["Features", "Solutions", "Pricing", "Docs"].map((item) => (
+            {["Workflows", "Solutions", "Docs"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -55,15 +54,10 @@ export default function N7nLandingPage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <a
-              href="#"
-              className="text-foreground/80 hover:text-foreground transition-colors"
-            >
-              Sign In
-            </a>
-            <button className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+            <Button className="py-4 h-10 bg-gradient-to-b from-accent-foreground via-orange-500 to-orange-700/60 text-accent rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border">
               Get Started
-            </button>
+            </Button>
+            <ModeToggle />
           </div>
         </div>
       </div>
@@ -81,14 +75,15 @@ export default function N7nLandingPage() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-orange-400/20 mb-8"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
               <span className="w-2 h-2 bg-primary rounded-full mr-2" />
-              <span className="text-sm text-primary">
-                Workflow Automation Platform
+
+              <span className=" relative text-sm text-primary">
+                <p>Workflow Automation Platform</p>
               </span>
             </motion.div>
 
@@ -108,12 +103,12 @@ export default function N7nLandingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+              <Button className="py-4 bg-gradient-to-b from-accent-foreground via-orange-500 to-orange-700/60 text-accent rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border h-10">
                 Start Building Free
-              </button>
-              <button className="px-8 py-4 border border-border rounded-lg font-medium hover:bg-accent transition-colors">
+              </Button>
+              <Button className="py-4 text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border h-10">
                 View Demo
-              </button>
+              </Button>
             </div>
 
             {/* Trusted by companies */}
@@ -143,7 +138,7 @@ export default function N7nLandingPage() {
             className="relative"
           >
             {/* Workflow Visualization */}
-            <div className="relative bg-card border rounded-2xl p-8 shadow-2xl">
+            <div className="relative bg-card border-[1px] border-orange-400/50 rounded-2xl p-8 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-red-400 rounded-full" />
@@ -159,13 +154,13 @@ export default function N7nLandingPage() {
                     <span className="text-primary">🌐</span>
                   </div>
                   <div className="flex-1 h-1 bg-border rounded-full">
-                    <div className="h-1 bg-primary rounded-full w-1/2" />
+                    <div className="h-1 bg-orange-600/50 rounded-full w-1/2" />
                   </div>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                     <span className="text-primary">⚡</span>
                   </div>
                   <div className="flex-1 h-1 bg-border rounded-full">
-                    <div className="h-1 bg-primary rounded-full w-3/4" />
+                    <div className="h-1 bg-orange-500/80 rounded-full w-3/4" />
                   </div>
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                     <span className="text-primary">💬</span>
@@ -267,8 +262,8 @@ export default function N7nLandingPage() {
                   {feature.description}
                 </p>
 
-                <div className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-primary/0 transition-all duration-300 group-hover:w-full w-0" />
-                <div className="absolute top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-primary/0 transition-all duration-300 group-hover:w-full w-0" />
+                <div className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-primary/0 transition-all duration-300 group-hover:w-full w-0" />
+                <div className="absolute top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-primary/0 transition-all duration-300 group-hover:w-full w-0" />
               </motion.div>
             ))}
           </div>
@@ -353,7 +348,7 @@ export default function N7nLandingPage() {
                 className="relative w-14 h-8 bg-primary rounded-full transition-all duration-300"
               >
                 <div
-                  className={`absolute top-1 w-6 h-6  rounded-full shadow-lg transition-transform duration-300 ${
+                  className={`absolute bg-orange-600 top-1 w-6 h-6  rounded-full shadow-lg transition-transform duration-300 ${
                     isAnnual
                       ? "transform translate-x-6"
                       : "transform translate-x-1"
@@ -375,7 +370,9 @@ export default function N7nLandingPage() {
               <motion.div
                 key={plan.name}
                 className={`relative bg-card border rounded-2xl p-8 ${
-                  plan.popular ? "ring-2 ring-primary shadow-xl" : "shadow-lg"
+                  plan.popular
+                    ? "ring-2 ring-orange-700 shadow-xl"
+                    : "shadow-lg"
                 }`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -384,7 +381,7 @@ export default function N7nLandingPage() {
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-orange-600 text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
                   </div>
@@ -577,6 +574,7 @@ export default function N7nLandingPage() {
       <Navigation />
       <HeroSection />
       <Logos />
+      <InteractiveTabs />
       <FeaturesSection />
       <PricingSection />
       <Footer />

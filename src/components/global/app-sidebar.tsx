@@ -29,7 +29,7 @@ export const AppSidebar = () => {
       <SidebarHeader className=" border-b ">
         <SidebarMenu>
           <SidebarMenuButton asChild>
-            <Link href="/workflows" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <Image width={15} height={30} alt="logo" src="/logo.svg" />
               <span className="group-data-[collapsible=icon]:hidden font-semibold text-sm">
                 n7n
