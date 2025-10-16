@@ -18,24 +18,23 @@ import {
 import { menuItems } from "@/const";
 import { CreditCardIcon, LogOutIcon, StarIcon } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { useHasActiveSubscription } from "@/features/subscription/hooks/use-sub";
 
 export const AppSidebar = () => {
+  const { hasActiveSubscription, isLoading } = useHasActiveSubscription();
   const router = useRouter();
   const pathname = usePathname();
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className=" border-b ">
         <SidebarMenu>
-          <SidebarMenuButton>
-            <SidebarMenuButton
-              asChild
-              className=" h-15 px-4 flex items-center gap-x-2"
-            >
-              <Link prefetch href={"/workflows"}>
-                <Image width={15} height={30} alt="logo" src="/logo.svg" />
-                <p className="icon text-sm font-semibold ">n7n</p>
-              </Link>
-            </SidebarMenuButton>
+          <SidebarMenuButton asChild>
+            <Link href="/workflows" className="flex items-center gap-2">
+              <Image width={15} height={30} alt="logo" src="/logo.svg" />
+              <span className="group-data-[collapsible=icon]:hidden font-semibold text-sm">
+                n7n
+              </span>
+            </Link>
           </SidebarMenuButton>
         </SidebarMenu>
       </SidebarHeader>
@@ -71,14 +70,16 @@ export const AppSidebar = () => {
       <SidebarFooter>
         <SidebarMenu className=" bg-muted/20 rounded-md py-2 ">
           <SidebarMenuItem>
-            <SidebarMenuButton
-              tooltip={"update to pro"}
-              className=" gap-x-4"
-              onClick={() => {}}
-            >
-              <StarIcon className=" size-4" />
-              <span>Update to pro</span>
-            </SidebarMenuButton>
+            {!hasActiveSubscription && !isLoading && (
+              <SidebarMenuButton
+                tooltip={"update to pro"}
+                className=" gap-x-4"
+                onClick={() => {}}
+              >
+                <StarIcon className=" size-4" />
+                <span>Update to pro</span>
+              </SidebarMenuButton>
+            )}
             <SidebarMenuButton
               tooltip={"update to pro"}
               className=" gap-x-4"

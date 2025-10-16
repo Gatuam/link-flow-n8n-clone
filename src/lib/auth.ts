@@ -31,7 +31,6 @@ export const auth = betterAuth({
             },
           ],
           successUrl: process.env.POLAR_SUCCESS_URL,
-         
         }),
         portal(),
       ],
