@@ -68,7 +68,7 @@ export const AppSidebar = () => {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu className=" bg-muted/20 rounded-md py-2 ">
+        <SidebarMenu className=" py-2 ">
           <SidebarMenuItem>
             {!hasActiveSubscription && !isLoading && (
               <SidebarMenuButton
