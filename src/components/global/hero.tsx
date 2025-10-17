@@ -45,9 +45,9 @@ export default function InteractiveTabs() {
   return (
     <div className=" bg-background flex items-center justify-center p-4">
       <div className=" mx-auto">
-        <div className=" max-w-7xl relative bg-gradient-to-b from-orange-600 to-orange-500/0 p-4 rounded-3xl overflow-hidden ">
-          <div className=" z-6 absolute bg-gradient-to-t from-background to-transparent w-full h-full"></div>
-          <div className=" absolute animate-pulse rounded-2xl -z-0 inset-0 opacity-45 h-full w-full  bg-[radial-gradient(#e5e7eb_0.8px,transparent_0.5px)] [background-size:16px_16px]"></div>
+        <div className=" max-w-7xl relative bg-gradient-to-b from-orange-600 to-orange-500/0 p-3 md:p-4 rounded-3xl overflow-hidden ">
+          <div className=" z-6 absolute bg-gradient-to-t from-background/80 md:from-background to-transparent w-full h-full"></div>
+          <div className=" absolute animate-pulse rounded-2xl -z-0 inset-0 opacity-15 h-full w-full  bg-[radial-gradient(#e5e7eb_0.8px,transparent_0.5px)] [background-size:16px_16px]"></div>
           <div className=" relative bg-card rounded-2xl overflow-hidden w-full">
             {/* Tabs */}
             <div className="flex flex-col md:flex-row">

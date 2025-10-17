@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import InteractiveTabs from "@/components/global/hero";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { ModeToggle } from "@/components/global/theme-toggle";
 
 export default function N7nLandingPage() {
@@ -31,10 +30,12 @@ export default function N7nLandingPage() {
   const Navigation = () => (
     <motion.nav
       className={`fixed top-0 w-full z-50 transition-all duration-200 ${
-        isScrolled ? "/60 backdrop-blur-md border-b" : "bg-transparent"
+        isScrolled
+          ? "/60 backdrop-blur-md border-b border-accent/20"
+          : "bg-transparent"
       }`}
     >
-      <div className="container max-w-7xl mx-auto  py-4">
+      <div className="container px-7 md:px-0   max-w-7xl mx-auto  py-4 ">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Image width={15} height={30} alt="logo" src="/logo.svg" />
@@ -54,7 +55,7 @@ export default function N7nLandingPage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button className="py-4 h-10 bg-gradient-to-b from-accent-foreground via-orange-500 to-orange-700/60 text-accent rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border">
+            <Button className="py-4 bg-gradient-to-b from-orange-200 via-orange-500 to-orange-700/60 text-accent-foreground rounded-lg font-medium hover:bg-orange-400/90 transition-colors border-orange-500 border h-10">
               Get Started
             </Button>
             <ModeToggle />
@@ -66,8 +67,8 @@ export default function N7nLandingPage() {
 
   // Hero Section
   const HeroSection = () => (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      <div className="container max-w-7xl mx-autopx-6 relative z-10">
+    <section className=" flex w-full h-full px-7 mt-6 md:px-0   items-center justify-center relative  pt-20">
+      <div className="container max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -92,41 +93,36 @@ export default function N7nLandingPage() {
               <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent block">
                 Powerful...
               </span>
-              Workflows. n7n
+              Workflows...
             </h1>
 
-            <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
+            <p className="text-md md:text-lg text-foreground/80 mb-8 leading-relaxed">
               n7n is an extensible workflow automation tool. With a fair-code
               distribution model, n7n will always have visible source code, be
               available to self-host, and allow you to add your own custom
               functions, logic and apps.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="py-4 bg-gradient-to-b from-accent-foreground via-orange-500 to-orange-700/60 text-accent rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border h-10">
+            <div className="flex  flex-row gap-4">
+              <Button className="py-4 bg-gradient-to-b from-orange-200 via-orange-500 to-orange-700/60 text-accent-foreground rounded-lg font-medium hover:bg-orange-400/90 transition-colors border-orange-500 border h-10">
                 Start Building Free
               </Button>
-              <Button className="py-4 text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors border-orange-500 border h-10">
+              <Button className="py-4 text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors bg-gradient-to-b from-accent-foreground to-accent-foreground/40 border-orange-500 border h-10">
                 View Demo
               </Button>
             </div>
 
             {/* Trusted by companies */}
             <div className="mt-12">
-              <p className="text-foreground/60 mb-6">
+              <p className="text-foreground/60 mb-4">
                 Trusted by teams worldwide
               </p>
-              <div className="flex flex-wrap gap-8 items-center opacity-60">
-                {["Microsoft", "GitHub", "Google", "AWS", "Slack"].map(
-                  (company) => (
-                    <div
-                      key={company}
-                      className="text-foreground/60 font-medium"
-                    >
-                      {company}
-                    </div>
-                  )
-                )}
+              <div className="flex flex-wrap gap-x-4 md:gap-8 items-center opacity-60">
+                {["Microsoft", "GitHub", "Google", "AWS"].map((company) => (
+                  <div key={company} className="text-orange-400">
+                    {company}
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -138,7 +134,7 @@ export default function N7nLandingPage() {
             className="relative"
           >
             {/* Workflow Visualization */}
-            <div className="relative bg-card border-[1px] border-orange-400/50 rounded-2xl p-8 shadow-2xl">
+            <div className="relative bg-card border-[1px] border-orange-400/50 rounded-2xl py-8 px-5 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-red-400 rounded-full" />
@@ -147,9 +143,9 @@ export default function N7nLandingPage() {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6 w-full">
                 {/* Workflow nodes */}
-                <div className="flex items-center space-x-4">
+                <div className="flex justify-center items-center space-x-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                     <span className="text-primary">🌐</span>
                   </div>
@@ -167,7 +163,7 @@ export default function N7nLandingPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="w-full flex justify-between items-center gap-x-5">
                   {["Webhook", "Process Data", "Send Message"].map(
                     (step, index) => (
                       <div key={step} className="text-center">
@@ -240,7 +236,7 @@ export default function N7nLandingPage() {
               </span>
               ?
             </h2>
-            <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
+            <p className="text-md md:text-lg text-foreground/80 max-w-2xl mx-auto">
               Built for developers who need powerful automation without
               complexity
             </p>
@@ -250,13 +246,13 @@ export default function N7nLandingPage() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="group relative bg-card border rounded-2xl p-6 hover:shadow-xl transition-all duration-300"
+                className="group relative bg-card border rounded-2xl p-6 hover:shadow-xl transition-all duration-300 flex flex-col gap-y-4"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ y: -5 }}
               >
-                <feature.icon className=" size-4" />
+                <feature.icon className=" size-6" />
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-foreground/70 leading-relaxed">
                   {feature.description}
@@ -482,10 +478,10 @@ export default function N7nLandingPage() {
       <section className="w-full px-4 md:px-8 lg:px-16 py-12 lg:py-24 ">
         <div className="max-w-7xl mx-auto w-full flex flex-col gap-y-9">
           <div className=" flex flex-col gap-y-5">
-            <p className="text-center max-w-3xl mx-auto text-shades-dark-gray   text-6xl font-semibold tracking-tight ">
+            <p className="text-center max-w-3xl mx-auto text-shades-dark-gray text-4xl md:text-6xl font-semibold tracking-tighter ">
               The world's most popular workflow
             </p>
-            <p className="text-center max-w-3xl mx-auto text-shades-dark-gray font-light  text-md ">
+            <p className="text-center tracking-tight max-w-3xl mx-auto text-shades-dark-gray font-light  text-md ">
               The world's most popular workflow automation platform for
               technical teams including
             </p>
@@ -511,14 +507,16 @@ export default function N7nLandingPage() {
           <div className=" grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
             <a
               href="https://github.com/n8n-io/n8n"
-              className=" social-proof-card p-6 rounded-xl bg-gradient-to-br from-purple-500/10 to-orange-500/10 border border-white/10"
+              className=" social-proof-card p-6 rounded-xl bg-gradient-to-br from-orange-200/40 to-orange-500/10 border border-accent-foreground/10"
             >
               <div className="flex flex-col justify-center text-center items-center gap-3">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="text-white">⭐</span>
+                <div className="w-12 h-12 bg-accent-foreground/10 rounded-lg flex items-center justify-center">
+                  <span className="text-accent-foreground">50</span>
                 </div>
                 <div>
-                  <p className="text-white font-medium mb-3">Top 50 Github</p>
+                  <p className="text-accent-foreground font-medium mb-3">
+                    Top 50 Github
+                  </p>
                   <p className="text-shades-lavender-gray text-sm">
                     Our 149.1k stars place us among the most popular projects.
                   </p>
@@ -528,14 +526,14 @@ export default function N7nLandingPage() {
 
             <a
               href="https://www.g2.com/products/n8n/reviews"
-              className="social-proof-card p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-white/10"
+              className="social-proof-card p-6 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-accent-foreground/10"
             >
               <div className="flex flex-col justify-center text-center items-center gap-3">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="text-white">4.9</span>
+                <div className="w-12 h-12 bg-accent-foreground/10 rounded-lg flex items-center justify-center">
+                  <span className="text-accent-foreground">4.9</span>
                 </div>
                 <div>
-                  <p className="text-white font-medium mb-3">
+                  <p className="text-accent-foreground font-medium mb-3">
                     4.9/5 stars on G2
                   </p>
                   <p className="text-shades-lavender-gray text-sm">
@@ -547,14 +545,14 @@ export default function N7nLandingPage() {
 
             <a
               href="https://community.n8n.io/"
-              className="social-proof-card p-6 rounded-xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-white/10"
+              className="social-proof-card p-6 rounded-xl bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-accent-foreground/10"
             >
               <div className="flex flex-col justify-center text-center items-center gap-3">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="text-white">👥</span>
+                <div className="w-12 h-12 bg-accent-foreground/10 rounded-lg flex items-center justify-center">
+                  <span className="text-accent-foreground">👥</span>
                 </div>
                 <div>
-                  <p className="text-white font-medium mb-3">
+                  <p className="text-accent-foreground font-medium mb-3">
                     200k+ community members
                   </p>
                   <p className="text-shades-lavender-gray text-sm">
@@ -570,7 +568,7 @@ export default function N7nLandingPage() {
   }
 
   return (
-    <main className="  min-h-screen  text-foreground">
+    <main className="  min-h-screen text-foreground">
       <Navigation />
       <HeroSection />
       <Logos />
