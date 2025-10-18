@@ -318,7 +318,7 @@ export default function N7nLandingPage() {
     ];
 
     return (
-      <section id="pricing" className="py-20 ">
+      <section id="pricing" className=" relative py-20 ">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
