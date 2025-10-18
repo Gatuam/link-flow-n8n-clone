@@ -9,7 +9,7 @@ import { generateSlug } from "random-word-slugs";
 import * as z from "zod";
 
 export const workFlowsRouter = createTRPCRouter({
-  create: premiumProcedure.mutation(({ ctx }) => {
+  create: protectedProcedure.mutation(({ ctx }) => {
     return prisma.workflow.create({
       data: {
         name: generateSlug(3),
