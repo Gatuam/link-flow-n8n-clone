@@ -1,11 +1,14 @@
 "use client";
 import { useCreateWorkFlow, useSuspenseWorkFLow } from "../hooks/use-workflows";
+import { Workflow } from "../../../generated/prisma";
 
 import React from "react";
 import {
   EmptyView,
   EntityContainer,
   EntityHeader,
+  EntityItems,
+  EntityList,
   EntityPagination,
   EntitySearch,
   ErrorView,
@@ -14,15 +17,19 @@ import {
 import { useUpgradePopup } from "../hooks/use-upgrade-popup";
 import { useWorkflowsParams } from "../hooks/use-workflow-params";
 import { UseEntitySearchDebounce } from "@/hooks/use-entuity-serach";
+import { WorkflowIcon } from "lucide-react";
 
 export const WorkFlowsList = () => {
   const workflows = useSuspenseWorkFLow();
 
-  if (workflows.data.items.length === 0) {
-    return <WorkflowEmpty />;
-  }
-
-  return <div>{JSON.stringify(workflows.data, null, 2)}</div>;
+  return (
+    <EntityList
+      items={workflows.data.items}
+      getkey={(workflow) => workflow.id}
+      renderItem={(workflows) => <WorkflowItem data={workflows} />}
+      emptyView={<WorkflowEmpty />}
+    />
+  );
 };
 
 export const WorkFlowHeader = ({ disable }: { disable?: boolean }) => {
@@ -107,6 +114,23 @@ export const WorkflowEmpty = () => {
         message="You haven't create a workflow yet with this name or the workflow didn't exist. Get start by creat a workflow."
       />
     </>
+  );
+};
+
+export const WorkflowItem = ({ data }: { data: Workflow }) => {
+  return (
+    <EntityItems
+      herf={`/workflows/${data.id}`}
+      title={data.name}
+      subtitle={<>Update Todo &bull; Create TODO</>}
+      image={
+        <div className=" size-8 flex items-center justify-center">
+          <WorkflowIcon className=" size-5 text-muted-foreground" />
+        </div>
+      }
+      onRemove={() => {}}
+      isRemoving={false}
+    />
   );
 };
 
