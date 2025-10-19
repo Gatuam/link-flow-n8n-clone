@@ -5,8 +5,12 @@ import React from "react";
 import {
   EntityContainer,
   EntityHeader,
+  EntityPagination,
+  EntitySearch,
 } from "@/components/global/entity-components";
 import { useUpgradePopup } from "../hooks/use-upgrade-popup";
+import { useWorkflowsParams } from "../hooks/use-workflow-params";
+import { UseEntitySearchDebounce } from "@/hooks/use-entuity-serach";
 
 export const WorkFlowsList = () => {
   const workflows = useSuspenseWorkFLow();
@@ -39,6 +43,35 @@ export const WorkFlowHeader = ({ disable }: { disable?: boolean }) => {
   );
 };
 
+export const WorkflowSearch = () => {
+  const [params, setParams] = useWorkflowsParams();
+  const { searchValus, onSearchChange } = UseEntitySearchDebounce({
+    params,
+    setParams,
+  });
+  return (
+    <EntitySearch
+      value={searchValus}
+      onChange={onSearchChange}
+      plceHolder="Serach workflow"
+    />
+  );
+};
+
+export const WorkflowPagination = () => {
+  const workflow = useSuspenseWorkFLow();
+  const [params, setParams] = useWorkflowsParams();
+
+  return (
+    <EntityPagination
+      onPageChange={(page) => setParams({ ...params, page })}
+      disable={workflow.isFetching}
+      totalPages={workflow.data.totalPages}
+      page={workflow.data.page}
+    />
+  );
+};
+
 export const WorkFlowContainer = ({
   children,
 }: {
@@ -47,8 +80,8 @@ export const WorkFlowContainer = ({
   return (
     <EntityContainer
       header={<WorkFlowHeader />}
-      search={<></>}
-      pagination={<></>}
+      search={<WorkflowSearch />}
+      pagination={<WorkflowPagination />}
     >
       {children}
     </EntityContainer>

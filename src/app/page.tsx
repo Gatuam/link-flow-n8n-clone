@@ -11,9 +11,10 @@ import {
   Settings2Icon,
   User2Icon,
 } from "lucide-react";
-import InteractiveTabs from "@/components/global/hero";
+import InteractiveTabs from "@/features/home/components/hero";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/global/theme-toggle";
+import { SvgAnimation } from "@/features/home/components/svg-anmation";
 
 export default function N7nLandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +68,7 @@ export default function N7nLandingPage() {
 
   // Hero Section
   const HeroSection = () => (
-    <section className=" flex w-full h-full px-7 mt-6 md:px-0   items-center justify-center relative  pt-20">
+    <section className=" flex w-full h-full px-7 mt-6 md:px-0   items-center justify-center relative  pt-39">
       <div className="container max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -321,13 +322,13 @@ export default function N7nLandingPage() {
       <section id="pricing" className=" relative py-20 ">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="text-3xl lg:text-5xl font-bold mb-6">
               Simple, Transparent{" "}
-              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-orange-400/70 bg-clip-text text-transparent">
                 Pricing
               </span>
             </h2>
-            <p className="text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
+            <p className="md:text-xl  text-foreground/80 max-w-2xl mx-auto mb-8">
               Start free and scale as you grow. No hidden fees.
             </p>
 
@@ -417,15 +418,15 @@ export default function N7nLandingPage() {
                   ))}
                 </ul>
 
-                <button
-                  className={`w-full py-4 rounded-lg font-medium transition-colors ${
+                <Button
+                  className={`w-full  rounded-lg font-medium transition-colors ${
                     plan.popular
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      ? "bg-gradient-to-b from-orange-500 to-orange-300 text-primary-foreground hover:bg-primary/90"
                       : "bg-accent text-foreground hover:bg-accent/80"
                   }`}
                 >
                   {plan.cta}
-                </button>
+                </Button>
               </motion.div>
             ))}
           </div>
