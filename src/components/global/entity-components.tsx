@@ -1,8 +1,20 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { Plus, Search } from "lucide-react";
+import { AlertTriangle, Loader, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { Input } from "../ui/input";
+
+import { FolderMinus } from "tabler-icons-react";
+import { ArrowUpRightIcon } from "lucide-react";
+
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 
 type EntityHeaderProps = {
   title: string;
@@ -139,7 +151,7 @@ export const EntityPagination = ({
         <Button
           variant={"default"}
           disabled={page === totalPages || totalPages === 0 || disable}
-          onClick={() => onPageChange(Math.min(totalPages, totalPages + 1))}
+          onClick={() => onPageChange(Math.min(page + 1, totalPages + 1))}
         >
           Next
         </Button>
@@ -147,3 +159,72 @@ export const EntityPagination = ({
     </div>
   );
 };
+
+type StateViewProps = {
+  message?: string;
+};
+
+type LoadingViewProps = {
+  entity?: string;
+} & StateViewProps;
+
+export const LoadingView = ({
+  entity = "items",
+  message,
+}: LoadingViewProps) => {
+  return (
+    <div className=" flex justify-center items-center h-full flex-1  gap-y-4">
+      <div className=" animate-pulse">
+        <Loader className=" size-6 animate-spin text-muted-foreground" />
+        <p className=" text-sm text-muted-foreground">
+          {message || `Laoding...${entity}`}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+type ErrorViewProps = {
+  entity?: string;
+} & StateViewProps;
+
+export const ErrorView = ({ entity = "items", message }: ErrorViewProps) => {
+  return (
+    <div className=" flex justify-center items-center h-full flex-1  gap-y-4">
+      <div className=" animate-pulse">
+        <AlertTriangle className=" size-6 animate-spin text-destructive" />
+        <p className=" text-sm text-muted-foreground">
+          {message || `Error...${entity}`}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+type EmptyViewProps = {
+  onNew?: () => void;
+} & StateViewProps;
+
+export function EmptyView({ message, onNew }: EmptyViewProps) {
+  return (
+    <Empty className=" border bg-accent">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <FolderMinus />
+        </EmptyMedia>
+        <EmptyTitle>No Projects or Invalid Query? </EmptyTitle>
+        <EmptyDescription>
+          {message
+            ? message
+            : `You haven&apos;t created any projects yet. Get started by creating
+          your first project.`}
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button onClick={onNew}>Create Project</Button>
+      </EmptyContent>
+    </Empty>
+  );
+}
+
+
